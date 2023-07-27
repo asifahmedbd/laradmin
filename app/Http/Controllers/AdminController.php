@@ -4,11 +4,15 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use App\Models\User;
 
 class AdminController extends Controller
 {
     public function adminDashboard(){
-		return view('admin.index');
+    	$id = Auth::user()->id;
+    	$admin_info = User::find($id);
+    	//dd($admin_info);
+		return view('admin.index', compact('admin_info'));
 	}
 
 	public function adminLogout(Request $request) {
