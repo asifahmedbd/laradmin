@@ -15,7 +15,9 @@ class CheckRole
      */
     public function handle(Request $request, Closure $next, $role): Response
     {
-        if($request->user->role())
+        if($request->user()->role !== $role){
+            return redirect('dashboard');
+        }
         return $next($request);
     }
 }
